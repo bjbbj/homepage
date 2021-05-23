@@ -3,13 +3,14 @@ import http.server
 import socketserver
 
 from http import HTTPStatus
-
+from datetime import date
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         self.send_response(HTTPStatus.OK)
         self.end_headers()
-        msg = 'Hello there! Nice to meet you! You requested %s' % (self.path)
+        self.today = date.today()
+        msg = 'Hello there! Today is %s' % (self.today)
         self.wfile.write(msg.encode())
 
 
